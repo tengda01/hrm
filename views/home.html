@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app.home">
+<head>
+	<meta charset="UTF-8">
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="../vendor/css/bootstrap.min.css">
+	<script type="text/javascript" src="../vendor/js/angular.min.js"></script>
+	<script type="text/javascript" src="../vendor/js/jquery.min.js"></script>
+	<script type="text/javascript" src="../vendor/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/app.home.js"></script>
+	<script type="text/javascript" src="../scripts/controllers/home.js"></script>
+	<script type="text/javascript" src="../scripts/services/homeService.js"></script>
+	<script type="text/javascript" src="../scripts/services/userService.js"></script>
+	<script type="text/javascript" src="../scripts/controllers/user.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/login.css">
+</head>
+<body>
+	<div ng-controller="HomeController">
+		<div class="b">
+		XXXX后台管理系统
+		</div>
+			
+   <div class="myHeader">
+    <div class="left">
+      <img src="../assets/u383.png" height="24" width="24" alt="">    
+    </div>
+    <div class="right">
+      <img src="../assets/u391.png" height="24" width="24" alt="">
+      <img src="../assets/u393.png" height="24" width="24" alt="">
+    </div>
+  </div>
+		 <div class="myCenter">
+   
+  </div>
+  <div class="hello">
+  	<ul>
+  		<li>员工管理</li>
+  		<li>员工管理</li>
+  		<li>员工管理</li>
+  		<li>员工管理</li>
+  		<li>员工管理</li>
+  		<li>员工管理</li>
+  	</ul>
+  </div>
+  	
+		
+   
+		</div>
+		<div class="user-table" ng-controller="UserController">
+		<div>
+			<select ng-model="offset">
+				<option value="5">5</option>
+				<option value="8">8</option>
+				<option value="10">10</option>
+			</select>
+		</div>
+		<div>	
+     <button type="button" ng-click="handlePage(-1)" class="btn btn-primary btn-sm">上一页</button>
+     &nbsp;
+     <button type="button" ng-click="handlePage(1)" class="btn btn-primary btn-sm">下一页</button>
+		</div>
+		<ul>
+      <li class="id"><label>查找编号：<input type="number" ng-model="id"></label></li>
+      <li class="search"><button ng-click="search()">确定</button></li>
+    </ul>
+			<table>
+				
+				<tr ng-repeat="user in users track by user.id">
+					<td>{{user.id}}</td>
+					<td>{{user.loginname}}</td>
+					<td>{{user.password}}</td>
+					<td>{{user.status}}</td>
+					<td>{{user.createdate | date :'yyyy-MM-dd HH:mm:ss'}}</td>
+					<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" ng-click="edit(user.id,user.loginname,user.password,user.status)">修改</button></td>
+					<td><button type="button" ng-click="deleteUser(user.id)">删除</button></td>
+				</tr>
+			</table>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">添加</button>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">员工信息修改</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">用户名:</label>
+            <input type="text" class="form-control" id="recipient-name" ng-model="datas.loginname">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">密码:</label>
+            <input type="text" class="form-control" id="recipient-password" ng-model="datas.password">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">状态:</label>
+            <input type="text" class="form-control" id="recipient-status" ng-model="datas.status">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" ng-click="add()">添加</button>
+        <button type="button" class="btn btn-primary" ng-click="saveEdit()">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+	</div>
+</body>
+</html>
